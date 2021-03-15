@@ -2,22 +2,19 @@
   <div>
     <v-row justify="center">
       <v-col cols="12" sm="12">
-        <v-card rounded="lg" min-height="50" color="indigo accent-3">
-          <h1 class="text-center">รายการรถยนต์</h1>
-        </v-card> </v-col
-      ><v-col v-for="(i, index) in list" :key="index" cols="3"
-        ><v-card 
-        rounded="lg" 
-        color="grey lighten-1" 
-        @click= "flat"
-        :to="{name: 'carDetail-id', params: { id: i } }" 
+        <h1 class="text-center">รายการรถยนต์</h1> </v-col>
+        <v-col v-for="(i, index) in list" :key="index" cols="3"
+        ><v-card rounded="lg" 
+        color="white" 
+        @click= flat 
+        :to="{name: 'carDetail-id', params: { id: i } }"
         nuxt>
           <v-toolbar color="indigo darken-4" dark dense flat>
-            <v-toolbar-title class="body-2"> {{ i.name }} </v-toolbar-title>
+            <v-toolbar-title class="body-3"> {{ i.name }} </v-toolbar-title>
           </v-toolbar>
           <v-img
             class="white--text align-end"
-            height="200px"
+            min-height="200px"
             :src="i.imgUrl"
             align="center"
           >
@@ -44,7 +41,7 @@
           <v-card-actions>
             <v-btn
               @click="flat"
-              to="/carDetail"
+              :to="{name: 'carOrder-id', params: { id: i } }"
               nuxt
               color="yellow darken-2"
               rounded

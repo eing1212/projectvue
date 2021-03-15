@@ -1,0 +1,120 @@
+<template>
+  <div>
+    <v-row justify="center">
+      <v-simple-table>
+        <template #default>
+          <thead>
+            <tr>
+              <th class="text-left">email</th>
+              <th class="text-left">Ront</th>
+              <th class="text-left">Slip</th>
+              <th class="text-left">dateStart</th>
+              <th class="text-left">dateEnd</th>
+              <th class="text-left">Total</th>
+              <th class="text-left">Name</th>
+              <th class="text-left">LastName</th>
+              <th class="text-left">SerName</th>
+              <th class="text-left">call</th>
+              <th class="text-left">State</th>
+            </tr>
+            <tr v-for="(i, index) in list" :key="index">
+              <th class="text-left">{{ i.email }}</th>
+              <th class="text-left">{{ i.Ront }}</th>
+              <th class="text-left">{{ i.Slip }}</th>
+              <th class="text-left">{{ i.dateStart }}</th>
+              <th class="text-left">{{ i.dateEnd }}</th>
+              <th class="text-left">{{ i.Total }}</th>
+              <th class="text-left">{{ i.Name }}</th>
+              <th class="text-left">{{ i.LastName }}</th>
+              <th class="text-left">{{ i.SerName }}</th>
+              <th class="text-left">{{ i.call }}</th>
+              <th class="text-left">{{ i.State }}</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr v-for="item in desserts" :key="item.name">
+              <td>{{ item.name }}</td>
+              <td>{{ item.calories }}</td>
+            </tr>
+          </tbody>
+        </template>
+      </v-simple-table></v-row
+    >
+  </div>
+</template>
+<script>
+import { db } from '~/plugins/firebaseConfig.js'
+export default {
+  data() {
+    return {
+      list: '',
+      // desserts: [
+      //   {
+      //     name: 'i.Name',
+      //     calories: 159,
+      //   },
+      //   {
+      //     name: 'Ice cream sandwich',
+      //     calories: 237,
+      //   },
+      //   {
+      //     name: 'Eclair',
+      //     calories: 262,
+      //   },
+      //   {
+      //     name: 'Cupcake',
+      //     calories: 305,
+      //   },
+      //   {
+      //     name: 'Gingerbread',
+      //     calories: 356,
+      //   },
+      //   {
+      //     name: 'Jelly bean',
+      //     calories: 375,
+      //   },
+      //   {
+      //     name: 'Lollipop',
+      //     calories: 392,
+      //   },
+      //   {
+      //     name: 'Honeycomb',
+      //     calories: 408,
+      //   },
+      //   {
+      //     name: 'Donut',
+      //     calories: 452,
+      //   },
+      //   {
+      //     name: 'KitKat',
+      //     calories: 518,
+      //   },
+      // ],
+    }
+  },
+
+  mounted() {
+    this.getdata()
+  },
+  methods: {
+    getdata() {
+      db.collection('Employee')
+        .orderBy('email', 'asc')
+        .onSnapshot((querySnapshot) => {
+          const data = []
+          querySnapshot.forEach((doc) => {
+            data.push(doc.data())
+          })
+          this.list = data
+          console.log(this.list)
+        })
+    },
+  },
+}
+</script>
+
+<style>
+.ic {
+  margin-right: 0.4rem;
+}
+</style>

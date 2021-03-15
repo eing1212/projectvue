@@ -51,29 +51,13 @@
 import { db } from '~/plugins/firebaseConfig.js'
 export default {
   data() {
-    return { list: [],carid:this.$route.params.id }
- 
-  },
-
-  mounted() {
-    this.getdata()
-  },
-  methods: {
-    getdata() {
-      console.log('carid='+ carid);
-      db.collection('cardata')
-     
-        .where('carID','==',this.carid)
-        .onSnapshot((querySnapshot) => {
-          const data = []
-          querySnapshot.forEach((doc) => {
-            data.push(doc.data())
-          })
-          this.list = data
-          console.log(this.list)
-       
-        })
-    },
+    return {
+      list: [],
+      carid: this.$route.params.id.carID,
+      name: this.$route.params.id.name,
+      price: this.$route.params.id.price,
+      imgUrl: this.$route.params.id.imgUrl,
+    }
   },
 }
 </script>
